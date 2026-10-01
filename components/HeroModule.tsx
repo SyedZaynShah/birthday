@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useAudio } from "./BackgroundMusic";
 
 export default function HeroModule() {
   const [isLoaded, setIsLoaded] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const { startMusic } = useAudio();
 
   useEffect(() => {
     setIsLoaded(true);
@@ -124,6 +126,11 @@ export default function HeroModule() {
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
           variants={fadeUpVariants}
+          onClick={(e) => {
+            e.preventDefault();
+            startMusic();
+            document.querySelector('#gift')?.scrollIntoView({ behavior: 'smooth' });
+          }}
         >
           <span className="hero-cta-text">OPEN YOUR GIFT</span>
           <span className="hero-cta-arrow">→</span>

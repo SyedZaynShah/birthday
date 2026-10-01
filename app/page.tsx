@@ -1,19 +1,43 @@
 "use client";
 
+import { useEffect } from "react";
 import HeroModule from "@/components/HeroModule";
 import LetterSection from "@/components/LetterSection";
 import FileSection from "@/components/FileSection";
 import StillLifeSection from "@/components/StillLifeSection";
 import FinalSection from "@/components/FinalSection";
+import { AudioProvider, SoundToggle, useAudio } from "@/components/BackgroundMusic";
+import { useSectionDetector } from "@/hooks/useSectionDetector";
 
-export default function Home() {
+function PageContent() {
+  const { setSection } = useAudio();
+  const currentSection = useSectionDetector();
+
+  // Update audio volume when section changes
+  useEffect(() => {
+    if (currentSection !== null) {
+      setSection(currentSection);
+    }
+  }, [currentSection, setSection]);
+
   return (
-    <main>
+    <>
+      <SoundToggle />
       <HeroModule />
       <LetterSection />
       <FileSection />
       <StillLifeSection />
       <FinalSection />
-    </main>
+    </>
+  );
+}
+
+export default function Home() {
+  return (
+    <AudioProvider>
+      <main>
+        <PageContent />
+      </main>
+    </AudioProvider>
   );
 }
