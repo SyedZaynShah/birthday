@@ -1596,32 +1596,41 @@ body {
 
   /* Centered composition on mobile */
   .stilllife-composition {
-    position: static;
+    position: relative;
     width: 100%;
     max-width: 100%;
-    min-height: 400px;
+    min-height: 500px;
     margin: 0 auto 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .stilllife-camera {
-    top: 60px;
-    right: 50%;
-    transform: translateX(20%);
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
     width: 140px;
+    margin-bottom: 30px;
   }
 
   .stilllife-flowers {
-    top: 0;
-    right: 50%;
-    transform: translateX(50%);
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
     width: 220px;
+    margin-bottom: 30px;
   }
 
   .stilllife-swatches {
-    bottom: 20px;
-    right: 50%;
-    transform: translateX(50%);
+    position: relative;
+    bottom: auto;
+    right: auto;
+    transform: none;
     gap: 10px;
+    margin-bottom: 30px;
   }
 
   .stilllife-swatch {
@@ -1634,11 +1643,14 @@ body {
   }
 
   .stilllife-handwritten {
+    position: relative;
     top: auto;
-    bottom: 240px;
-    right: 50%;
-    transform: translateX(50%) rotate(1deg);
+    bottom: auto;
+    right: auto;
+    transform: none;
     font-size: 15px;
+    margin-bottom: 20px;
+    text-align: center;
   }
 
   .stilllife-detail {
@@ -1678,15 +1690,17 @@ body {
   }
 
   .stilllife-composition {
-    min-height: 360px;
+    min-height: 460px;
   }
 
   .stilllife-camera {
     width: 120px;
+    margin-bottom: 25px;
   }
 
   .stilllife-flowers {
     width: 200px;
+    margin-bottom: 25px;
   }
 
   .stilllife-swatch {
