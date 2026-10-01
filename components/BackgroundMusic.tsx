@@ -101,14 +101,22 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     if (!audio) return;
 
     if (isPlaying) {
+      // Turn off
       fadeVolume(0, 800);
       setTimeout(() => {
         audio.pause();
         setIsPlaying(false);
       }, 800);
     } else {
+      // Turn on - if never started, start from beginning
       const targetVolume = sectionVolumes[currentSection as keyof typeof sectionVolumes] || 0.21;
       audio.volume = 0;
+      
+      // Reset to beginning if audio hasn't been played yet
+      if (audio.currentTime === 0) {
+        audio.currentTime = 0;
+      }
+      
       audio.play()
         .then(() => {
           setIsPlaying(true);
@@ -116,6 +124,8 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
         })
         .catch((error) => {
           console.error("Audio playback failed:", error);
+          // Try to enable audio after user interaction
+          setIsPlaying(false);
         });
     }
   }, [isPlaying, currentSection, fadeVolume]);
@@ -151,7 +161,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     <AudioContext.Provider value={{ startMusic, setSection, toggleSound, isPlaying }}>
       <audio
         ref={audioRef}
-        src="/audio/iraday.mp3"
+        src="/audio/iraaday.mp3"
         loop
         preload="auto"
       />
